@@ -1,7 +1,7 @@
 import TextField from '@mui/material/TextField';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import look from '../utils/Look';
+import look from '../utils/look';
 import cLook from '../utils/cLook';
 import {
   ContainerAppInput,
