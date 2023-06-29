@@ -3,7 +3,10 @@ export const recorridoPromSum = (array) => {
   for (let index = 0; index < array.length - 1; index++) {
     auxiliarSumar += Math.abs(array[index] - array[index + 1]);
   }
-  return { suma: auxiliarSumar, promedio:( auxiliarSumar / array.length).toFixed(2)};
+  return {
+    suma: auxiliarSumar,
+    promedio: (auxiliarSumar / (array.length-1)).toFixed(2),
+  };
 };
 
 export const arrayOfLabels = (array) => {

@@ -1,6 +1,7 @@
 import { cleaner } from './cleaner';
-import { recorridoPromSum, arrayOfLabels } from './resume';
-const look = (initialPoint, stringOfNumbers, option) => {
+import { recorridoPromSum } from './resume';
+import { arrayOfLabels } from './resume';
+const scan = (initialPoint, stringOfNumbers, direction) => {
   let data = cleaner(
     Array.from(stringOfNumbers.split(','), Number),
     initialPoint
@@ -20,10 +21,10 @@ const look = (initialPoint, stringOfNumbers, option) => {
   }); //filtra los números mayores
 
   let resolvedArray = null;
-  if (option == 'right') {
-    resolvedArray = higherNumbers.concat(minorNumbers.reverse());
-  } else if (option == 'left') {
-    resolvedArray = minorNumbers.reverse().concat(higherNumbers);
+  if (direction == 'left') {
+    resolvedArray = minorNumbers.reverse().concat([0]).concat(higherNumbers);
+  } else if (direction == 'right') {
+    resolvedArray = higherNumbers.concat([199]).concat(minorNumbers.reverse());
   }
   const recorridoData = recorridoPromSum(
     [parseInt(initialPoint)].concat(resolvedArray)
@@ -31,10 +32,10 @@ const look = (initialPoint, stringOfNumbers, option) => {
   return {
     res: [parseInt(initialPoint)].concat(resolvedArray),
     labelsArray: arrayOfLabels(resolvedArray),
-    algorithmName: 'Look',
+    algorithmName: 'Scan',
     recorrido: [initialPoint].concat(resolvedArray).length - 1,
     sizeRecorrido: recorridoData.suma,
     prom: recorridoData.promedio,
   };
 };
-export default look;
+export default scan;

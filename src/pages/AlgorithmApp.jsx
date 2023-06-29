@@ -3,6 +3,9 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import look from '../utils/look';
 import cLook from '../utils/cLook';
+import scan from '../utils/scan';
+import cScan from '../utils/cScan';
+import fcfs from '../utils/fcfs';
 import {
   ContainerAppInput,
   ContainerAppResume,
@@ -42,7 +45,7 @@ const AlgorithmApp = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [algorithm, setAlgorithm] = useState('FIFO');
+  const [algorithm, setAlgorithm] = useState('FCFS');
   const [direction, setDirection] = useState('right');
   const handleChangeAlgorithm = (e, newAlignment) => {
     if (newAlignment !== null) {
@@ -60,6 +63,12 @@ const AlgorithmApp = () => {
       dataAlgorithm = look(initialPoint, recorridos, direction);
     } else if (algorithm == 'CLook') {
       dataAlgorithm = cLook(initialPoint, recorridos);
+    } else if (algorithm == 'Scan') {
+      dataAlgorithm = scan(initialPoint, recorridos, direction);
+    } else if (algorithm == 'CScan') {
+      dataAlgorithm = cScan(initialPoint, recorridos);
+    } else if (algorithm == 'FCFS') {
+      dataAlgorithm = fcfs(initialPoint, recorridos);
     }
     console.log(dataAlgorithm);
     setDataChart({
@@ -140,7 +149,7 @@ const AlgorithmApp = () => {
   };
 
   const ButtonsDirections = () => {
-    if (algorithm == 'Look') {
+    if (algorithm == 'Look' || algorithm == 'Scan') {
       return (
         <ToggleButtonGroup
           color="primary"
@@ -149,8 +158,8 @@ const AlgorithmApp = () => {
           onChange={handleChangeDirection}
           aria-label="Platform"
         >
-          <ToggleButton value="right">Derecha</ToggleButton>
           <ToggleButton value="left">Izquierda</ToggleButton>
+          <ToggleButton value="right">Derecha</ToggleButton>
         </ToggleButtonGroup>
       );
     } else {
@@ -162,8 +171,8 @@ const AlgorithmApp = () => {
           onChange={handleChangeDirection}
           aria-label="Platform"
         >
-          <ToggleButton disabled>Derecha</ToggleButton>
           <ToggleButton disabled>Izquierda</ToggleButton>
+          <ToggleButton disabled>Derecha</ToggleButton>
         </ToggleButtonGroup>
       );
     }
@@ -205,7 +214,7 @@ const AlgorithmApp = () => {
             {...register('initialPoint', {
               required: 'El punto inicial es requerido',
               onChange: (e) => {
-                setInitialPoint(e.target.value);
+                setInitialPoint(parseInt(e.target.value));
               },
             })}
             error={Boolean(errors.initialPoint)}
@@ -235,7 +244,7 @@ const AlgorithmApp = () => {
               onChange={handleChangeAlgorithm}
               aria-label="Platform"
             >
-              <ToggleButton value="FIFO">FIFO</ToggleButton>
+              <ToggleButton value="FCFS">FCFS</ToggleButton>
               <ToggleButton value="Scan">Scan</ToggleButton>
               <ToggleButton value="CScan">C-Scan</ToggleButton>
               <ToggleButton value="Look">Look</ToggleButton>

@@ -1,12 +1,14 @@
-import { cleaner } from './cleaner';
-import { recorridoPromSum, arrayOfLabels } from './resume';
-const look = (initialPoint, stringOfNumbers, option) => {
+import { cleanBorders, cleaner } from './cleaner';
+import { recorridoPromSum } from './resume';
+import { arrayOfLabels } from './resume';
+const cScan = (initialPoint, stringOfNumbers) => {
   let data = cleaner(
     Array.from(stringOfNumbers.split(','), Number),
     initialPoint
   ).sort(function (a, b) {
     return a - b;
   }); //ordena el array
+  data = cleanBorders(data); //elimina 199 o 0 del array
   let minorNumbers = data.filter((dt) => {
     if (dt < initialPoint) {
       return parseInt(dt);
@@ -19,22 +21,20 @@ const look = (initialPoint, stringOfNumbers, option) => {
     }
   }); //filtra los números mayores
 
-  let resolvedArray = null;
-  if (option == 'right') {
-    resolvedArray = higherNumbers.concat(minorNumbers.reverse());
-  } else if (option == 'left') {
-    resolvedArray = minorNumbers.reverse().concat(higherNumbers);
-  }
+  let resolvedArray = higherNumbers
+    .concat([199])
+    .concat([0])
+    .concat(minorNumbers);
   const recorridoData = recorridoPromSum(
     [parseInt(initialPoint)].concat(resolvedArray)
   );
   return {
     res: [parseInt(initialPoint)].concat(resolvedArray),
     labelsArray: arrayOfLabels(resolvedArray),
-    algorithmName: 'Look',
+    algorithmName: 'C-Scan',
     recorrido: [initialPoint].concat(resolvedArray).length - 1,
     sizeRecorrido: recorridoData.suma,
     prom: recorridoData.promedio,
   };
 };
-export default look;
+export default cScan;
