@@ -43,6 +43,7 @@ export const ContainerCardImage = styled.div`
   justify-items: center;
   align-items: center;
   justify-content: center;
+  padding:10px;
 `;
 export const ContainerCardTitle = styled.div`
   width: 100%;

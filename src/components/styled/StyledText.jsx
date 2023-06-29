@@ -17,7 +17,7 @@ export const StyledText = styled.p`
       return '20px;';
     }
   }};
-  font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
+  font-weight: ${({ bold }) => (bold ? 'bold' : "'normal'")};
   text-align: ${({ align }) => {
     if (align == 'start') {
       return 'start;';

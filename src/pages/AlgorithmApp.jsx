@@ -29,6 +29,7 @@ import {
   Legend,
 } from 'chart.js';
 import { useForm } from 'react-hook-form';
+import sstf from '../utils/sstf';
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -69,6 +70,8 @@ const AlgorithmApp = () => {
       dataAlgorithm = cScan(initialPoint, recorridos);
     } else if (algorithm == 'FCFS') {
       dataAlgorithm = fcfs(initialPoint, recorridos);
+    } else if (algorithm == 'SSTF') {
+      dataAlgorithm = sstf(initialPoint, recorridos);
     }
     console.log(dataAlgorithm);
     setDataChart({
@@ -93,7 +96,7 @@ const AlgorithmApp = () => {
     window.scrollTo({ top: 175, behavior: 'smooth' });
   };
   const data = {
-    labels: ['0', '1', '2', '3', '4', '5', '6', '7'],
+    labels: [],
     datasets: [
       {
         label: 'Pista',
@@ -179,7 +182,7 @@ const AlgorithmApp = () => {
   };
   const reset = () => {
     setDataChart({
-      labels: ['0', '1', '2', '3', '4', '5', '6', '7'],
+      labels: [],
       datasets: [
         {
           label: 'Pista',
@@ -250,7 +253,6 @@ const AlgorithmApp = () => {
               <ToggleButton value="Look">Look</ToggleButton>
               <ToggleButton value="CLook">C-Look</ToggleButton>
               <ToggleButton value="SSTF">SSTF</ToggleButton>
-              <ToggleButton value="Cfq">Cfq</ToggleButton>
             </ToggleButtonGroup>
             <StyledText size="m">Dirección</StyledText>
             <ButtonsDirections></ButtonsDirections>
