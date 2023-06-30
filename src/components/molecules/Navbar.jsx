@@ -17,7 +17,7 @@ const Navbar = () => {
             <NavbarLink to="/">
               <NavbarContainerIconText>
                 <Icon></Icon>
-                <p>Grupo 5</p>
+                <p>Grupo 3</p>
               </NavbarContainerIconText>
             </NavbarLink>
           </NavbarLinkContainer>
